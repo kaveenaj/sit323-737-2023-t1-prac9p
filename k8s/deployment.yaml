@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-mongodb-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-mongodb-k8s
+  template:
+    metadata:
+      labels:
+        app: web-mongodb-k8s
+    spec:
+      containers:
+        - name: web-mongodb-k8s
+          image: kaveenaj/web-mongodb-k8s
+          ports:
+            - containerPort: 5000
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "5000"
+            - name: MONGODB_URI
+              value: mongodb://mongodb:27017/mydatabase
